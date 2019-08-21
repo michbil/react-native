@@ -40,6 +40,12 @@ Pod::Spec.new do |s|
   s.dependency folly_dep_name, folly_version
   s.dependency "React-graphics", version
   s.dependency "React-jsiexecutor", version
+  s.dependency "RCTRequired", version
+  s.dependency "RCTTypeSafety", version
+  s.dependency "FBLazyVector", version
+  s.dependency "FBReactNativeSpec", version
+  
+
 
   s.subspec "attributedstring" do |ss|
     ss.dependency             folly_dep_name, folly_version
@@ -75,6 +81,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "components" do |ss|
+   
     ss.subspec "activityindicator" do |sss|
       sss.dependency             folly_dep_name, folly_version
       sss.compiler_flags       = folly_compiler_flags
@@ -90,6 +97,15 @@ Pod::Spec.new do |s|
       sss.source_files         = "fabric/components/image/**/*.{m,mm,cpp,h}"
       sss.exclude_files        = "**/tests/*"
       sss.header_dir           = "react/components/image"
+      sss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\"" }
+    end
+
+    ss.subspec "modal" do |sss|
+      sss.dependency             folly_dep_name, folly_version
+      sss.compiler_flags       = folly_compiler_flags
+      sss.source_files         = "fabric/components/modal/**/*.{m,mm,cpp,h}"
+      sss.exclude_files        = "**/tests/*"
+      sss.header_dir           = "react/components/modal"
       sss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\"" }
     end
 
@@ -187,6 +203,17 @@ Pod::Spec.new do |s|
                               "**/android/*"
     ss.header_dir           = "react/textlayoutmanager"
     ss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\"" }
+  end
+
+  s.subspec "modules" do |ss|
+    ss.subspec "rncore" do |sss|
+      sss.dependency             folly_dep_name, folly_version
+      sss.compiler_flags       = folly_compiler_flags
+      sss.source_files         = "fabric/modules/rncore/*.{m,mm,cpp,h}"
+      sss.exclude_files        = "**/tests/*", "fabric/modules/rncore/*Tests.{h,cpp}", 'fabric/modules/rncore/FBReactNativeTestSpec-generated.mm', 'fabric/modules/rncore/FBReactNativeSpec-generated.mm'
+      sss.header_dir           = "react/modules/rncore"
+      sss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\"" }
+    end
   end
 
   s.subspec "uimanager" do |ss|
