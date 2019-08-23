@@ -6,6 +6,7 @@
  */
 
 #import <React/RCTUIImageViewAnimated.h>
+#import <React/RCTWeakProxy.h>
 
 #import <mach/mach.h>
 #import <objc/runtime.h>
@@ -145,9 +146,14 @@ static NSUInteger RCTDeviceFreeMemory() {
 
 - (CADisplayLink *)displayLink
 {
+  // We only need a displayLink in the case of animated images, so short-circuit this code and don't create one for most of the use cases.
+  // Since this class is used for all RCTImageView's, this is especially important.
+  if (!_animatedImage) {
+    return nil;
+  }
+
   if (!_displayLink) {
-    __weak __typeof(self) weakSelf = self;
-    _displayLink = [CADisplayLink displayLinkWithTarget:weakSelf selector:@selector(displayDidRefresh:)];
+    _displayLink = [CADisplayLink displayLinkWithTarget:[RCTWeakProxy weakProxyWithTarget:self] selector:@selector(displayDidRefresh:)];
     NSString *runLoopMode = [NSProcessInfo processInfo].activeProcessorCount > 1 ? NSRunLoopCommonModes : NSDefaultRunLoopMode;
     [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:runLoopMode];
   }
