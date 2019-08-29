@@ -18,6 +18,7 @@ const StyleSheet = require('../StyleSheet/StyleSheet');
 
 const invariant = require('invariant');
 
+import type {ScrollResponderType} from '../Components/ScrollView/ScrollView';
 import type {ViewStyleProp} from '../StyleSheet/StyleSheet';
 import type {
   ViewabilityConfig,
@@ -236,14 +237,6 @@ type OptionalProps<ItemT> = {
   /**
    * See `ScrollView` for flow type and further documentation.
    */
-  horizontalFadingEdgesEnabled?: ?boolean,
-  /**
-   * See `ScrollView` for flow type and further documentation.
-   */
-  verticalFadingEdgesEnabled?: ?boolean,
-  /**
-   * See `ScrollView` for flow type and further documentation.
-   */
   fadingEdgeLength?: ?number,
 };
 export type Props<ItemT> = RequiredProps<ItemT> &
@@ -453,7 +446,7 @@ class FlatList<ItemT> extends React.PureComponent<Props<ItemT>, void> {
   /**
    * Provides a handle to the underlying scroll responder.
    */
-  getScrollResponder(): any {
+  getScrollResponder(): ?ScrollResponderType {
     if (this._listRef) {
       return this._listRef.getScrollResponder();
     }

@@ -58,7 +58,6 @@ type State = {|
   virtualized: boolean,
   empty: boolean,
   useFlatListItemComponent: boolean,
-  useFadingEdges: boolean,
   fadingEdgeLength: number,
 |};
 
@@ -74,7 +73,6 @@ class FlatListExample extends React.PureComponent<Props, State> {
     virtualized: true,
     empty: false,
     useFlatListItemComponent: false,
-    useFadingEdges: false,
     fadingEdgeLength: 0,
   };
 
@@ -137,7 +135,6 @@ class FlatListExample extends React.PureComponent<Props, State> {
               {renderSmallSwitchOption(this, 'useFlatListItemComponent')}
               {Platform.OS === 'android' && (
                 <View>
-                  {renderSmallSwitchOption(this, 'useFadingEdges')}
                   <TextInput
                     placeholder="Fading edge length"
                     underlineColorAndroid="black"
@@ -155,8 +152,6 @@ class FlatListExample extends React.PureComponent<Props, State> {
           </View>
           <SeparatorComponent />
           <Animated.FlatList
-            horizontalFadingEdgesEnabled={this.state.useFadingEdges}
-            verticalFadingEdgesEnabled={this.state.useFadingEdges}
             fadingEdgeLength={this.state.fadingEdgeLength}
             ItemSeparatorComponent={ItemSeparatorComponent}
             ListHeaderComponent={<HeaderComponent />}

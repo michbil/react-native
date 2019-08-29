@@ -277,13 +277,14 @@ public class ReactHorizontalScrollViewManager extends ViewGroupManager<ReactHori
     view.setScrollbarFadingEnabled(!value);
   }
 
-  @ReactProp(name = "horizontalFadingEdgesEnabled")
-  public void setHorizontalFadingEdgesEnabled(ReactHorizontalScrollView view, boolean value) {
-    view.setHorizontalFadingEdgeEnabled(value);
-  }
-
   @ReactProp(name = "fadingEdgeLength")
   public void setFadingEdgeLength(ReactHorizontalScrollView view, int value) {
-    view.setFadingEdgeLength(value);
+    if (value > 0) {
+      view.setHorizontalFadingEdgeEnabled(true);
+      view.setFadingEdgeLength(value);
+    } else {
+      view.setHorizontalFadingEdgeEnabled(false);
+      view.setFadingEdgeLength(0);
+    }
   }
 }

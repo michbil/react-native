@@ -64,7 +64,21 @@ if (Platform.OS === 'android') {
 }
 
 export type ScrollResponderType = {
-  ...ScrollView,
+  // We'd like to do ...ScrollView here, however Flow doesn't seem
+  // to see the imperative methods of ScrollView that way. Workaround the
+  // issue by specifying them manually.
+  getScrollableNode: $PropertyType<ScrollView, 'getScrollableNode'>,
+  getInnerViewNode: $PropertyType<ScrollView, 'getInnerViewNode'>,
+  getNativeScrollRef: $PropertyType<ScrollView, 'getNativeScrollRef'>,
+
+  setNativeProps: $PropertyType<ScrollView, 'setNativeProps'>,
+  scrollTo: $PropertyType<ScrollView, 'scrollTo'>,
+  scrollWithoutAnimationTo: $PropertyType<
+    ScrollView,
+    'scrollWithoutAnimationTo',
+  >,
+  flashScrollIndicators: $PropertyType<ScrollView, 'flashScrollIndicators'>,
+
   ...typeof ScrollResponder.Mixin,
 };
 
@@ -336,21 +350,12 @@ type AndroidProps = $ReadOnly<{|
    */
   persistentScrollbar?: ?boolean,
   /**
-   * Fades out the left and right edges.
-   * The default value is false.
+   * Fades out the edges of the the scroll content.
    *
-   * @platform android
-   */
-  horizontalFadingEdgesEnabled?: ?boolean,
-  /**
-   * Fades out the up and down edges.
-   * The default value is false.
+   * If the value is greater than 0, the fading edges will be set accordingly
+   * to the current scroll direction and position,
+   * indicating if there is more content to show.
    *
-   * @platform android
-   */
-  verticalFadingEdgesEnabled?: ?boolean,
-  /**
-   * The amount of fading.
    * The default value is 0.
    *
    * @platform android

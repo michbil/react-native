@@ -278,14 +278,15 @@ public class ReactScrollViewManager extends ViewGroupManager<ReactScrollView>
     view.setScrollbarFadingEnabled(!value);
   }
 
-  @ReactProp(name = "verticalFadingEdgesEnabled")
-  public void setVerticalFadingEdgesEnabled(ReactScrollView view, boolean value) {
-    view.setVerticalFadingEdgeEnabled(value);
-  }
-
   @ReactProp(name = "fadingEdgeLength")
   public void setFadingEdgeLength(ReactScrollView view, int value) {
-    view.setFadingEdgeLength(value);
+    if (value > 0) {
+      view.setVerticalFadingEdgeEnabled(true);
+      view.setFadingEdgeLength(value);
+    } else {
+      view.setVerticalFadingEdgeEnabled(false);
+      view.setFadingEdgeLength(0);
+    }
   }
 
   @Override
