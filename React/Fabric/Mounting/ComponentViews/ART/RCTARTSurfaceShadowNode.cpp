@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
@@ -5,11 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <React/RCTAnimatedImage.h>
-#import <React/RCTDefines.h>
+namespace facebook {
+namespace react {
 
-RCT_EXTERN void RCTUIImageViewEnableWeakProxy(BOOL enabled);
+extern const char RCTARTSurfaceViewComponentName[] = "ARTSurfaceView";
 
-@interface RCTUIImageViewAnimated : UIImageView
-
-@end
+} // namespace react
+} // namespace facebook

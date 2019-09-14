@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-#import <React/RCTAnimatedImage.h>
-#import <React/RCTDefines.h>
+#import <React/RCTViewComponentView.h>
 
-RCT_EXTERN void RCTUIImageViewEnableWeakProxy(BOOL enabled);
-
-@interface RCTUIImageViewAnimated : UIImageView
+/**
+ * UIView class for root <ARTSurfaceView> component.
+ */
+@interface RCTARTSurfaceViewComponentView : RCTViewComponentView
 
 @end
