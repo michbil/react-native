@@ -42,6 +42,7 @@ Pod::Spec.new do |s|
   s.dependency "React-jsiexecutor", version
   s.dependency "RCTRequired", version
   s.dependency "RCTTypeSafety", version
+  s.dependency "FBReactNativeSpec", version
   s.dependency "ReactCommon/turbomodule/core", version
 
   s.subspec "attributedstring" do |ss|
@@ -111,7 +112,7 @@ Pod::Spec.new do |s|
       sss.source_files         = "fabric/components/rncore/*.{m,mm,cpp,h}"
       sss.exclude_files        = "**/tests/*", "fabric/components/rncore/*Tests.{h,cpp}"
       sss.header_dir           = "react/components/rncore"
-      sss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\"" }
+      sss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\" \"$(PODS_TARGET_SRCROOT)/fabric/components\"" }
     end
 
     ss.subspec "root" do |sss|
