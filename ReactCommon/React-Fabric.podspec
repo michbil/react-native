@@ -139,7 +139,6 @@ Pod::Spec.new do |s|
       sss.exclude_files        = "**/tests/*", "fabric/components/rncore/*Tests.{h,cpp}"
       sss.header_dir           = "react/components/rncore"
       sss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\" \"$(PODS_TARGET_SRCROOT)/fabric/components\"" }
-      #sss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\"" }
     end
 
     ss.subspec "picker" do |sss|
@@ -282,7 +281,7 @@ Pod::Spec.new do |s|
     ss.source_files         = "fabric/uimanager/**/*.{m,mm,cpp,h}"
     ss.exclude_files        = "**/tests/*",
     ss.header_dir           = "react/uimanager"
-    ss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\" \"$(PODS_TARGET_SRCROOT)/fabric/componentregistry\"" }
+    ss.pod_target_xcconfig  = { "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/Folly\"" }
   end
 
   s.subspec "utils" do |ss|
